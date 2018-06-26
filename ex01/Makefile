@@ -1,0 +1,17 @@
+NAME=phonebook
+
+SRC=Person.class.cpp  main.cpp
+
+FLAGS=-Wall -Wextra -Werror
+
+all: $(NAME)
+
+$(NAME):
+	g++ $(SRC) -o $(NAME)
+
+clean:
+	/bin/rm $(NAME)
+
+fclean: clean
+
+re: fclean all
