@@ -59,7 +59,12 @@ Account::Account(int initial_deposit) {
  * Destructor
  */
 Account::~Account() {
-
+	std::cout
+			<< "[20150406_153629] "
+			<< "index:" << this->_accountIndex
+			<< ";amount:" << this->_amount
+			<< ";closed"
+			<< std::endl;
 }
 
 /**
@@ -70,17 +75,56 @@ Account::Account() {
 }
 
 void Account::makeDeposit(int deposit) {
-
+	std::cout
+			<< "[20150406_153629] "
+			<< "index:" << this->_accountIndex
+			<< ";p_amount:" << this->_amount
+			<< ";deposit:" << deposit
+			<< ";amount:" << this->_amount + deposit
+			<< ";deposits:" << this->_nbDeposits
+			<< std::endl;
+	this->_amount += deposit;
+	this->_nbDeposits++;
+	Account::_totalAmount += deposit;
+	Account::_totalNbDeposits++;
 }
 
 bool Account::makeWithdrawal(int withdrawal) {
+	if (this->_amount < withdrawal)
+	{
+		std::cout
+				<< "[20150406_153629] "
+				<< "index:" << this->_accountIndex
+				<< ";p_amount:" << this->_amount
+				<< ";withdrawal:refused"
+				<< std::endl;
+		return false;
+	}
+	std::cout
+			<< "[20150406_153629] "
+			<< "index:" << this->_accountIndex
+			<< ";p_amount:" << this->_amount
+			<< ";withdrawal:" << withdrawal
+			<< ";amount:" << this->_amount - withdrawal
+			<< ";deposits:" << this->_nbDeposits
+			<< std::endl;
+	this->_amount -= withdrawal;
+	this->_nbWithdrawals++;
+	Account::_totalAmount -= withdrawal;
+	Account::_totalNbWithdrawals++;
 	return true;
 }
 
 int Account::checkAmount() const {
-	return 0;
+	return this->_amount;
 }
 
 void Account::displayStatus() const {
-
+	std::cout
+			<< "[20150406_153629] "
+			<< "index:" << this->_accountIndex
+			<< ";amount:" << this->_amount
+			<< ";deposits:" << this->_nbDeposits
+			<< ";withdrawals:" << this->_nbWithdrawals
+			<< std::endl;
 }
